@@ -2,6 +2,10 @@
 
 Portfólio pessoal desenvolvido para apresentar meus projetos, tecnologias, interesses profissionais e minha visão sobre tecnologia, liderança e negócios.
 
+## 🌐 Acesse o portfólio
+
+🔗 [igor1209.github.io/igorfranca.dev](https://igor1209.github.io/igorfranca.dev/)
+
 ## Sobre o projeto
 
 Este site foi criado com foco em uma apresentação profissional, moderna e objetiva.
@@ -34,7 +38,12 @@ Tenho interesse especial em desenvolvimento de produtos, liderança, gestão, in
 igorfranca.dev/
 │
 ├── index.html
-├── styles.css
-├── script.js
-├── perfil.jpeg
-└── README.md
+├── README.md
+│
+└── Assets/
+    ├── css/
+    │   └── styles.css
+    ├── js/
+    │   └── script.js
+    └── images/
+        └── perfil.jpeg
