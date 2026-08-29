@@ -1,60 +1,68 @@
 // =============================================
-// MENU MOBILE
+// ELEMENTOS DO MENU MOBILE
 // =============================================
 
 const menuBtn = document.getElementById("menuBtn");
-
 const navMobile = document.getElementById("navMobile");
-
 const iconMenu = document.getElementById("iconMenu");
-
 const iconClose = document.getElementById("iconClose");
 
 
-// Abre e fecha o menu
-
-menuBtn.addEventListener("click", () => {
-
-  const isOpen = !navMobile.hidden;
-
-  navMobile.hidden = isOpen;
-
-
-  iconMenu.style.display =
-    isOpen ? "block" : "none";
-
-
-  iconClose.style.display =
-    isOpen ? "none" : "block";
-
-
-  menuBtn.setAttribute(
-    "aria-label",
-    isOpen ? "Abrir menu" : "Fechar menu"
-  );
-
-});
-
-
 // =============================================
-// FECHAR MENU AO CLICAR EM UM LINK
+// ABRIR E FECHAR MENU MOBILE
 // =============================================
 
-navMobile
-  .querySelectorAll("a")
-  .forEach((link) => {
+if (menuBtn && navMobile && iconMenu && iconClose) {
 
-    link.addEventListener("click", () => {
+  menuBtn.addEventListener("click", () => {
 
-      navMobile.hidden = true;
+    const isOpen = !navMobile.hidden;
 
-      iconMenu.style.display = "block";
+    navMobile.hidden = isOpen;
 
-      iconClose.style.display = "none";
+    iconMenu.style.display = isOpen
+      ? "block"
+      : "none";
+
+    iconClose.style.display = isOpen
+      ? "none"
+      : "block";
+
+    menuBtn.setAttribute(
+      "aria-label",
+      isOpen
+        ? "Abrir menu"
+        : "Fechar menu"
+    );
+
+  });
+
+
+  // =============================================
+  // FECHAR MENU AO CLICAR EM UM LINK
+  // =============================================
+
+  navMobile
+    .querySelectorAll("a")
+    .forEach((link) => {
+
+      link.addEventListener("click", () => {
+
+        navMobile.hidden = true;
+
+        iconMenu.style.display = "block";
+        iconClose.style.display = "none";
+
+        menuBtn.setAttribute(
+          "aria-label",
+          "Abrir menu"
+        );
+
+      });
 
     });
 
-  });
+}
 
 
 // =============================================
@@ -68,7 +76,6 @@ const sections = [
   "habilidades",
   "contato"
 ];
-
 
 const navLinks =
   document.querySelectorAll(".nav-link");
@@ -104,18 +111,17 @@ const observer = new IntersectionObserver(
 );
 
 
-// Observa cada seção
+// =============================================
+// OBSERVAR AS SEÇÕES
+// =============================================
 
 sections.forEach((id) => {
 
   const element =
     document.getElementById(id);
 
-
   if (element) {
-
     observer.observe(element);
-
   }
 
 });
@@ -127,7 +133,6 @@ sections.forEach((id) => {
 
 const year =
   document.getElementById("year");
-
 
 if (year) {
 
