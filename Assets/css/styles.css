@@ -142,9 +142,9 @@ img {
   gap: 0.25rem;
 }
 
-/* Respeita o atributo hidden até o menu ser aberto no celular. */
+/* O estado de fechamento prevalece sobre o display:flex do menu. */
 .nav-mobile[hidden] {
-  display: none;
+  display: none !important;
 }
 
 
