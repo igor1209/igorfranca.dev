@@ -1,5 +1,5 @@
 // =============================================
-// ELEMENTOS DO MENU MOBILE
+// MENU MOBILE: ABRE, FECHA E MANTÉM ESTADO
 // =============================================
 
 const menuBtn = document.getElementById("menuBtn");
@@ -7,61 +7,53 @@ const navMobile = document.getElementById("navMobile");
 const iconMenu = document.getElementById("iconMenu");
 const iconClose = document.getElementById("iconClose");
 
-
-// =============================================
-// ABRIR E FECHAR MENU MOBILE
-// =============================================
-
 if (menuBtn && navMobile && iconMenu && iconClose) {
+  const setMenuOpen = (open) => {
+    // Mantém o atributo hidden e o ícone sempre sincronizados.
+    navMobile.hidden = !open;
+    menuBtn.setAttribute("aria-expanded", String(open));
+    menuBtn.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+    iconMenu.style.display = open ? "none" : "block";
+    iconClose.style.display = open ? "block" : "none";
+  };
+
+  // Garante menu recolhido ao abrir ou recarregar a página.
+  setMenuOpen(false);
 
   menuBtn.addEventListener("click", () => {
-
-    const isOpen = !navMobile.hidden;
-
-    navMobile.hidden = isOpen;
-
-    iconMenu.style.display = isOpen
-      ? "block"
-      : "none";
-
-    iconClose.style.display = isOpen
-      ? "none"
-      : "block";
-
-    menuBtn.setAttribute(
-      "aria-label",
-      isOpen
-        ? "Abrir menu"
-        : "Fechar menu"
-    );
-
+    setMenuOpen(navMobile.hidden);
   });
 
+  // Fechar depois de selecionar uma seção.
+  navMobile.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setMenuOpen(false));
+  });
 
-  // =============================================
-  // FECHAR MENU AO CLICAR EM UM LINK
-  // =============================================
+  // Fechar ao tocar fora do menu.
+  document.addEventListener("click", (event) => {
+    if (
+      !navMobile.hidden &&
+      !navMobile.contains(event.target) &&
+      !menuBtn.contains(event.target)
+    ) {
+      setMenuOpen(false);
+    }
+  });
 
-  navMobile
-    .querySelectorAll("a")
-    .forEach((link) => {
+  // Teclado: ESC fecha o menu.
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !navMobile.hidden) {
+      setMenuOpen(false);
+      menuBtn.focus();
+    }
+  });
 
-      link.addEventListener("click", () => {
-
-        navMobile.hidden = true;
-
-        iconMenu.style.display = "block";
-        iconClose.style.display = "none";
-
-        menuBtn.setAttribute(
-          "aria-label",
-          "Abrir menu"
-        );
-
-      });
-
-    });
-
+  // Não carregar o estado mobile ao passar para desktop.
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 768 && !navMobile.hidden) {
+      setMenuOpen(false);
+    }
+  });
 }
 
 
